@@ -5,8 +5,8 @@ class CreateAddresses < ActiveRecord::Migration[7.2]
     return if table_exists? "addresses"
     create_table :addresses do |t|
       t.string :zip_code, index: true
-      t.string :address, index: true
-      t.string :address_number, index: true
+      t.string :street, index: true
+      t.string :street_number, index: true
       t.string :complement, index: true
       t.string :state, index: true
       t.string :city, index: true

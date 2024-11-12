@@ -16,8 +16,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_12_161727) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "zip_code"
-    t.string "address"
-    t.string "address_number"
+    t.string "street"
+    t.string "street_number"
     t.string "complement"
     t.string "state"
     t.string "city"
@@ -26,13 +26,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_12_161727) do
     t.bigint "addressable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_addresses_on_address"
-    t.index ["address_number"], name: "index_addresses_on_address_number"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
     t.index ["city"], name: "index_addresses_on_city"
     t.index ["complement"], name: "index_addresses_on_complement"
     t.index ["neighborhood"], name: "index_addresses_on_neighborhood"
     t.index ["state"], name: "index_addresses_on_state"
+    t.index ["street"], name: "index_addresses_on_street"
+    t.index ["street_number"], name: "index_addresses_on_street_number"
     t.index ["zip_code"], name: "index_addresses_on_zip_code"
   end
 

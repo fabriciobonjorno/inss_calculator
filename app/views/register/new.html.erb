@@ -1,0 +1,95 @@
+<div class="row g-0 app-auth-wrapper">
+  <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5 d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="app-auth-body mx-auto">
+      <div class="app-auth-branding mb-4">
+        <a class="app-logo" href="index.html">
+          <img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo">
+        </a>
+      </div>
+      <h2 class="auth-heading text-center mb-4">Sign up to Portal</h2>
+      <div class="auth-form-container text-start mx-auto">
+        <%= form_with model: @proponent, url: register_path, data: { controller: "multi-step-form" }, class: "auth-form auth-signup-form" do |f| %>
+          <div data-target="multi-step-form.step" class="step-1">
+            <div class="email mb-3">
+              <%= f.text_field :name, class: "form-control", required: true,  placeholder: "Nome Completo" %>
+            </div>
+            <div class="email mb-3">
+              <%= f.text_field :document, class: "form-control", required: true,  placeholder: "CPF" %>
+            </div>
+            <div class="password mb-3">
+              <%= f.date_field :birth_date, class: "form-control", required: true,  placeholder: "Data de Nascimento" %>
+            </div>
+          </div>
+          <%= f.fields_for :address do |ff| %>
+            <div data-target="multi-step-form.step" class="step-2 d-none">
+              <div class="email mb-3">
+                <%= ff.text_field :zip_code, class: "form-control", required: true,  placeholder: "Cep" %>
+              </div>
+              <div class="email mb-3">
+                <%= ff.text_field :street, class: "form-control", required: true,  placeholder: "Rua" %>
+              </div>
+              <div class="password mb-3">
+                <%= ff.text_field :street_number, class: "form-control", required: true,  placeholder: "Número" %>
+              </div>
+              <div class="password mb-3">
+                <%= ff.text_field :complement, class: "form-control", required: true,  placeholder: "Complemento" %>
+              </div>
+              <div class="password mb-3">
+                <%= ff.text_field :city, class: "form-control", required: true,  placeholder: "Cidade" %>
+              </div>
+              <div class="password mb-3">
+                <%= ff.text_field :state, class: "form-control", required: true,  placeholder: "Estado" %>
+              </div>
+            </div>
+          <% end %>
+          <%= f.fields_for :phone do |ff| %>
+            <div data-target="multi-step-form.step" class="step-3 d-none">
+              <div class="password mb-3">
+                <%= ff.select :kind,
+                  Phone.kinds.keys, { prompt: 'Selecione um Tipo'},
+                  class: "form-control"
+                %>
+              </div>
+              <div class="password mb-3">
+                <%= ff.text_field :number, class: "form-control", required: true,  placeholder: "(00) 0000-0000" %>
+              </div>
+            </div>
+          <% end %>
+          <div data-target="multi-step-form.step" class="step-4 d-none">
+            <div class="password mb-3">
+              <%= f.text_field :income, class: "form-control", required: true,  placeholder: "Sálario" %>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="mt-3">
+              <button type="button" data-action="multi-step-form#previous" class="btn btn-secondary" data-target="multi-step-form.previous">Anterior</button>
+              <button type="button" data-action="multi-step-form#next" class="btn app-btn-primary" data-target="multi-step-form.next">Próximo</button>
+              <button type="submit" class="btn btn-success d-none" data-target="multi-step-form.submit">Enviar</button>
+            </div>
+          </div>
+        <% end %>
+        <!--//auth-form-->
+      </div>
+      <!--//auth-form-container-->
+    </div>
+    <!--//auth-body-->
+  </div>
+  <!--//auth-main-col-->
+  <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+    <div class="auth-background-holder">
+    </div>
+    <div class="auth-background-mask"></div>
+    <div class="auth-background-overlay p-3 p-lg-5">
+      <div class="d-flex flex-column align-content-end h-100">
+        <div class="h-100"></div>
+        <div class="overlay-content p-3 p-lg-4 rounded">
+          <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
+          <div>Portal is a free Bootstrap 5 admin dashboard template. You can download and view the template license <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+        </div>
+      </div>
+    </div>
+    <!--//auth-background-overlay-->
+  </div>
+  <!--//auth-background-col-->
+</div>
+<!--//row-->
