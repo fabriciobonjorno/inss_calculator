@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_12_154619) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_12_161727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_12_154619) do
     t.index ["neighborhood"], name: "index_addresses_on_neighborhood"
     t.index ["state"], name: "index_addresses_on_state"
     t.index ["zip_code"], name: "index_addresses_on_zip_code"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.integer "kind"
+    t.string "number"
+    t.string "phoneble_type", null: false
+    t.bigint "phoneble_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phoneble_type", "phoneble_id"], name: "index_phones_on_phoneble"
   end
 
   create_table "proponents", force: :cascade do |t|
