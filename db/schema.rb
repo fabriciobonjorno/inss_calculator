@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_12_161727) do
     t.bigint "phoneble_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["kind"], name: "index_phones_on_kind"
+    t.index ["number"], name: "index_phones_on_number"
     t.index ["phoneble_type", "phoneble_id"], name: "index_phones_on_phoneble"
   end
 

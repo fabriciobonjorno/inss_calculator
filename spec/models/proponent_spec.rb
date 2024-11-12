@@ -13,6 +13,7 @@ RSpec.describe Proponent, type: :model do
 
   describe 'associations' do
     it { should have_one(:address).dependent(:destroy) }
+    it { should have_many(:phones).dependent(:destroy) }
   end
 
   describe 'address association' do
