@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_12_161727) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_13_134910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,9 +55,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_12_161727) do
     t.decimal "income", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "inss_value", precision: 10, scale: 2
     t.index ["birth_date"], name: "index_proponents_on_birth_date"
     t.index ["document"], name: "index_proponents_on_document", unique: true
     t.index ["income"], name: "index_proponents_on_income"
+    t.index ["inss_value"], name: "index_proponents_on_inss_value"
     t.index ["name"], name: "index_proponents_on_name"
   end
 end

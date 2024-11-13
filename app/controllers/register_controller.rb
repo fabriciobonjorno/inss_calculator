@@ -8,7 +8,6 @@ class RegisterController < ApplicationController
   end
 
   def create
-    params["proponent"]["income"] = clean_income(params["proponent"]["income"])
     @proponent = Proponent.new(proponent_params)
     @proponent.build_address unless @proponent.address
     @proponent.phones.build unless @proponent.phones.any?
@@ -48,7 +47,7 @@ class RegisterController < ApplicationController
 
   def proponent_params
     params.require(:proponent).permit(
-      :name, :document, :birth_date, :income,
+      :name, :document, :birth_date, :income, :inss_value,
       address_attributes: [ :zip_code, :street, :street_number, :complement, :neighborhood, :city, :state ],
       phones_attributes: [ :kind, :number ]
     )

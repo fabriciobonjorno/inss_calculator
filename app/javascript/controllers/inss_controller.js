@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="inss"
 export default class extends Controller {
-  static targets = ["incomeField"];
+  static targets = ["incomeField", "inssValueField"];
 
   connect() {
     this.incomeFieldTarget.addEventListener("input", this.handleInput.bind(this));
@@ -36,8 +36,25 @@ export default class extends Controller {
 
         if (response.ok) {
           const html = await response.text();
+
+          console.log("Resposta do servidor:", html);
+
           const inssValueContainer = document.getElementById("inss_value");
           inssValueContainer.innerHTML = html;
+
+          const regex = /R\$ (\d+\.\d{2})/;
+          const match = html.match(regex);
+
+          if (match) {
+            const inssString = match[1];
+            let inssNumeric = parseFloat(inssString);
+
+            const formattedInss = inssNumeric.toFixed(2);
+            this.inssValueFieldTarget.value = formattedInss;
+          } else {
+            console.error("Formato de valor de INSS inesperado", html);
+          }
+
         } else {
           console.error("Erro ao calcular INSS:", response);
         }
@@ -47,6 +64,7 @@ export default class extends Controller {
     } else {
       const inssValueContainer = document.getElementById("inss_value");
       inssValueContainer.innerHTML = "Valor do INSS: <strong>R$ 0,00</strong>";
+      this.inssValueFieldTarget.value = "0,00";
     }
   }
 }
