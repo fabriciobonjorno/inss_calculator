@@ -15,3 +15,6 @@ application.register("inss", InssController)
 
 import MultiStepFormController from "./multi_step_form_controller"
 application.register("multi-step-form", MultiStepFormController)
+
+import Chart from '@stimulus-components/chartjs'
+application.register('chart', Chart)

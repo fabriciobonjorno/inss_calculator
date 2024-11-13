@@ -81,43 +81,51 @@
           <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
 						href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Proponentes</a>
         </nav>
-        <div class="tab-content" id="orders-table-tab-content">
-          <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-            <div class="app-card app-card-orders-table shadow-sm mb-5">
-              <div class="app-card-body">
-                <div class="table-responsive">
-                  <table class="table app-table-hover mb-0 text-left">
-                    <thead>
+        <div class="mb-5 d-flex justify-content-center align-items-center">
+          <canvas
+    data-controller="chart"
+    data-chart-data-value="<%= @chart_data.to_json %>"
+    data-chart-options-value="<%= @chart_options.to_json %>"
+  ></canvas>
+        </div>
+      </div>
+      <div class="tab-content" id="orders-table-tab-content">
+        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+          <div class="app-card app-card-orders-table shadow-sm mb-5">
+            <div class="app-card-body">
+              <div class="table-responsive">
+                <table class="table app-table-hover mb-0 text-left">
+                  <thead>
+                    <tr>
+                      <th class="cell">ID</th>
+                      <th class="cell">Nome</th>
+                      <th class="cell">Cidade</th>
+                      <th class="cell">Estado</th>
+                      <th class="cell">Salário</th>
+                      <th class="cell">Valor Inss</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @proponents.each do |proponent| %>
                       <tr>
-                        <th class="cell">ID</th>
-                        <th class="cell">Nome</th>
-                        <th class="cell">Cidade</th>
-                        <th class="cell">Estado</th>
-                        <th class="cell">Salário</th>
-                        <th class="cell">Valor Inss</th>
+                        <td class="cell">#<%= proponent.id %></td>
+                        <td class="cell"><%= proponent.name %></td>
+                        <td class="cell"><%= proponent&.address.street %></td>
+                        <td class="cell"><%= proponent&.address.city %></td>
+                        <td class="cell">R$ <%= proponent.income %></td>
+                        <td class="cell">R$ <%= proponent.inss_value %></td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <% @proponents.each do |proponent| %>
-                        <tr>
-                          <td class="cell">#<%= proponent.id %></td>
-                          <td class="cell"><%= proponent.name %></td>
-                          <td class="cell"><%= proponent&.address.street %></td>
-                          <td class="cell"><%= proponent&.address.city %></td>
-                          <td class="cell">R$ <%= proponent.income %></td>
-                          <td class="cell">R$ <%= proponent.inss_value %></td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
+                    <% end %>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <div class="d-flex justify-content-center">
-              <%= paginate @proponents %>
-            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <%= paginate @proponents %>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
