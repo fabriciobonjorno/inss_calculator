@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_13_134910) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_13_153033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_13_134910) do
     t.index ["street"], name: "index_addresses_on_street"
     t.index ["street_number"], name: "index_addresses_on_street_number"
     t.index ["zip_code"], name: "index_addresses_on_zip_code"
+  end
+
+  create_table "dash_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_dash_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_dash_users_on_reset_password_token", unique: true
   end
 
   create_table "phones", force: :cascade do |t|

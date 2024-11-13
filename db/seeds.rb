@@ -49,3 +49,13 @@ else
     end
   end
 end
+
+puts "Criando usuario padrão para dash"
+dash_user_count = DashUser.count >= 1
+return puts "Já existe usuário cadastrado." if dash_user_count
+dash_user = DashUser.new(email: "superadmin@admin.com", password: "password")
+if dash_user.save
+  puts "Usuário salvo com sucesso"
+else
+  puts dash_user.errors.full_messages.join(', ')
+end
