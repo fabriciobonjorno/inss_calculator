@@ -28,40 +28,61 @@
             </div>
           </div>
           <%= f.fields_for :address do |ff| %>
-            <div data-multi-step-form-target="step" class="step-2 d-none">
+            <div data-multi-step-form-target="step" class="step-2 d-none" data-controller="address">
               <h6 class="text-center mb-4">Endereço</h6>
               <!-- Campo CEP -->
               <div class="email mb-3">
-                <%= ff.text_field :zip_code, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:zip_code].present?}", placeholder: "Cep" %>
+                <%= ff.text_field :zip_code, 
+                        data: { address_target: "zipCode", 
+                        action: "address#fetch" }, 
+                        class: "form-control #{'border border-danger-subtle' if ff.object.errors[:zip_code].present?}", 
+                        placeholder: "Cep" %>
                 <%= ff.object.errors[:zip_code].any? ? content_tag(:div, ff.object.errors[:zip_code].join(", "), class: "text-danger") : "" %>
               </div>
               <!-- Campo Rua -->
               <div class="email mb-3">
-                <%= ff.text_field :street, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:street].present?}", placeholder: "Rua" %>
+                <%= ff.text_field :street, 
+                        data: { address_target: "street" }, 
+                        class: "form-control #{'border border-danger-subtle' if ff.object.errors[:street].present?}",
+                        placeholder: "Rua" %>
                 <%= ff.object.errors[:street].any? ? content_tag(:div, ff.object.errors[:street].join(", "), class: "text-danger") : "" %>
               </div>
               <!-- Campo Número -->
               <div class="password mb-3">
-                <%= ff.text_field :street_number, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:street_number].present?}", placeholder: "Número" %>
+                <%= ff.text_field :street_number, 
+                        data: { address_target: "street_number" }, 
+                        class: "form-control #{'border border-danger-subtle' if ff.object.errors[:street_number].present?}", 
+                        placeholder: "Número" %>
                 <%= ff.object.errors[:street_number].any? ? content_tag(:div, ff.object.errors[:street_number].join(", "), class: "text-danger") : "" %>
               </div>
               <!-- Campo Complemento -->
               <div class="password mb-3">
-                <%= ff.text_field :complement, class: "form-control", placeholder: "Complemento" %>
+                <%= ff.text_field :complement, data: { address_target: "other" }, 
+                        class: "form-control", 
+                        placeholder: "Complemento" %>
               </div>
               <!-- Campo Bairro -->
               <div class="password mb-3">
-                <%= ff.text_field :neighborhood, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:neighborhood].present?}", placeholder: "Bairro" %>
+                <%= ff.text_field :neighborhood, 
+                        data: { address_target: "neighborhood" },
+                        class: "form-control #{'border border-danger-subtle' if ff.object.errors[:neighborhood].present?}", 
+                        placeholder: "Bairro" %>
                 <%= ff.object.errors[:neighborhood].any? ? content_tag(:div, ff.object.errors[:neighborhood].join(", "), class: "text-danger") : "" %>
               </div>
               <!-- Campo Cidade -->
               <div class="password mb-3">
-                <%= ff.text_field :city, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:city].present?}", placeholder: "Cidade" %>
+                <%= ff.text_field :city, 
+                        data: { address_target: "city" }, 
+                        class: "form-control #{'border border-danger-subtle' if ff.object.errors[:city].present?}", 
+                        placeholder: "Cidade" %>
                 <%= ff.object.errors[:city].any? ? content_tag(:div, ff.object.errors[:city].join(", "), class: "text-danger") : "" %>
               </div>
               <!-- Campo Estado -->
               <div class="password mb-3">
-                <%= ff.text_field :state, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:state].present?}", placeholder: "Estado" %>
+                <%= ff.text_field :state, 
+                        data: { address_target: "state" },
+                        class: "form-control #{'border border-danger-subtle' if ff.object.errors[:state].present?}", 
+                        placeholder: "Estado" %>
                 <%= ff.object.errors[:state].any? ? content_tag(:div, ff.object.errors[:state].join(", "), class: "text-danger") : "" %>
               </div>
             </div>

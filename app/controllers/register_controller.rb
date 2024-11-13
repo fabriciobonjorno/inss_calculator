@@ -35,6 +35,15 @@ class RegisterController < ApplicationController
     end
   end
 
+  def get_address
+    zip_code = params[:zip_code]
+    connection = Faraday.new(url: "https://viacep.com.br/ws/")
+    response = connection.get("#{zip_code}/json/")
+    json = response.body
+
+    render json:, status: :ok
+  end
+
   private
 
   def clean_income(income)
