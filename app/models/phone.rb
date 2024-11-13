@@ -3,7 +3,7 @@
 class Phone < ApplicationRecord
   validates :number, presence: true
 
-  enum kind: %i[cellphone commercial]
+  enum kind: %i[commercial mobile]
 
   belongs_to :phoneble, polymorphic: true
 end

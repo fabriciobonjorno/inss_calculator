@@ -32,4 +32,9 @@ export default class extends Controller {
     this.nextTarget.classList.toggle("d-none", this.currentStep === this.stepTargets.length - 1);
     this.submitTarget.classList.toggle("d-none", this.currentStep !== this.stepTargets.length - 1);
   }
+
+  submitForm(event) {
+    event.preventDefault();
+    this.element.submit();
+  }
 }

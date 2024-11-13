@@ -2,8 +2,7 @@
 
 FactoryBot.define do
   factory :phone do
-    kind { rand(0..1) }
+    kind { [ 'commercial', 'mobile' ].sample }
     number { Faker::PhoneNumber.phone_number_with_country_code }
-    phoneble { create(:proponent) }
   end
 end
