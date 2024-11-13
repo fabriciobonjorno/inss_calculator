@@ -10,19 +10,16 @@
       <div class="auth-form-container text-start mx-auto">
         <%= form_with model: @proponent, url: register_path, data: { controller: "multi-step-form" }, class: "auth-form auth-signup-form" do |f| %>
           <div data-multi-step-form-target="step" class="step-1">
-            <!-- Campo Nome -->
             <h6 class="text-center mb-4">Dados pessoais</h6>
-            <div class="email mb-3">
+            <div class="mb-3">
               <%= f.text_field :name, class: "form-control #{'border border-danger-subtle' if f.object.errors[:name].present?}", placeholder: "Nome Completo" %>
               <%= f.object.errors[:name].any? ? content_tag(:div, f.object.errors[:name].join(", "), class: "text-danger") : "" %>
             </div>
-            <!-- Campo CPF -->
-            <div class="email mb-3">
+            <div class="mb-3">
               <%= f.text_field :document, class: "form-control #{'border border-danger-subtle' if f.object.errors[:document].present?}", placeholder: "CPF" %>
               <%= f.object.errors[:document].any? ? content_tag(:div, f.object.errors[:document].join(", "), class: "text-danger") : "" %>
             </div>
-            <!-- Campo Data de Nascimento -->
-            <div class="password mb-3">
+            <div class="mb-3">
               <%= f.date_field :birth_date, class: "form-control #{'border border-danger-subtle' if f.object.errors[:birth_date].present?}", placeholder: "Data de Nascimento" %>
               <%= f.object.errors[:birth_date].any? ? content_tag(:div, f.object.errors[:birth_date].join(", "), class: "text-danger") : "" %>
             </div>
@@ -30,8 +27,7 @@
           <%= f.fields_for :address do |ff| %>
             <div data-multi-step-form-target="step" class="step-2 d-none" data-controller="address">
               <h6 class="text-center mb-4">Endereço</h6>
-              <!-- Campo CEP -->
-              <div class="email mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :zip_code, 
                         data: { address_target: "zipCode", 
                         action: "address#fetch" }, 
@@ -39,46 +35,40 @@
                         placeholder: "Cep" %>
                 <%= ff.object.errors[:zip_code].any? ? content_tag(:div, ff.object.errors[:zip_code].join(", "), class: "text-danger") : "" %>
               </div>
-              <!-- Campo Rua -->
-              <div class="email mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :street, 
                         data: { address_target: "street" }, 
                         class: "form-control #{'border border-danger-subtle' if ff.object.errors[:street].present?}",
                         placeholder: "Rua" %>
                 <%= ff.object.errors[:street].any? ? content_tag(:div, ff.object.errors[:street].join(", "), class: "text-danger") : "" %>
               </div>
-              <!-- Campo Número -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :street_number, 
                         data: { address_target: "street_number" }, 
                         class: "form-control #{'border border-danger-subtle' if ff.object.errors[:street_number].present?}", 
                         placeholder: "Número" %>
                 <%= ff.object.errors[:street_number].any? ? content_tag(:div, ff.object.errors[:street_number].join(", "), class: "text-danger") : "" %>
               </div>
-              <!-- Campo Complemento -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :complement, data: { address_target: "other" }, 
                         class: "form-control", 
                         placeholder: "Complemento" %>
               </div>
-              <!-- Campo Bairro -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :neighborhood, 
                         data: { address_target: "neighborhood" },
                         class: "form-control #{'border border-danger-subtle' if ff.object.errors[:neighborhood].present?}", 
                         placeholder: "Bairro" %>
                 <%= ff.object.errors[:neighborhood].any? ? content_tag(:div, ff.object.errors[:neighborhood].join(", "), class: "text-danger") : "" %>
               </div>
-              <!-- Campo Cidade -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :city, 
                         data: { address_target: "city" }, 
                         class: "form-control #{'border border-danger-subtle' if ff.object.errors[:city].present?}", 
                         placeholder: "Cidade" %>
                 <%= ff.object.errors[:city].any? ? content_tag(:div, ff.object.errors[:city].join(", "), class: "text-danger") : "" %>
               </div>
-              <!-- Campo Estado -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :state, 
                         data: { address_target: "state" },
                         class: "form-control #{'border border-danger-subtle' if ff.object.errors[:state].present?}", 
@@ -90,13 +80,11 @@
           <%= f.fields_for :phones do |ff| %>
             <div data-multi-step-form-target="step" class="step-3 d-none">
               <h6 class="text-center mb-4">Telefone</h6>
-              <!-- Campo Tipo de Telefone -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.select :kind, Phone.kinds.keys, { prompt: 'Selecione um Tipo' }, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:kind].present?}" %>
                 <%= ff.object.errors[:kind].any? ? content_tag(:div, ff.object.errors[:kind].join(", "), class: "text-danger") : "" %>
               </div>
-              <!-- Campo Número de Telefone -->
-              <div class="password mb-3">
+              <div class="mb-3">
                 <%= ff.text_field :number, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:number].present?}", placeholder: "(00) 0000-0000" %>
                 <%= ff.object.errors[:number].any? ? content_tag(:div, ff.object.errors[:number].join(", "), class: "text-danger") : "" %>
               </div>
@@ -104,8 +92,7 @@
           <% end %>
           <div data-multi-step-form-target="step" class="step-4 d-none">
             <h6 class="text-center mb-4">Sálario Atual</h6>
-            <!-- Campo Salário -->
-            <div data-controller="inss" class="password mb-3">
+            <div data-controller="inss" class="mb-3">
               <%= f.text_field :income, 
                                   class: "form-control #{'border border-danger-subtle' if f.object.errors[:income].present?}", 
                                   placeholder: "0,00", 
@@ -126,13 +113,9 @@
             </div>
           </div>
         <% end %>
-        <!--//auth-form-->
       </div>
-      <!--//auth-form-container-->
     </div>
-    <!--//auth-body-->
   </div>
-  <!--//auth-main-col-->
   <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
     <div class="auth-background-holder">
     </div>
@@ -150,8 +133,5 @@
         </div>
       </div>
     </div>
-    <!--//auth-background-overlay-->
   </div>
-  <!--//auth-background-col-->
 </div>
-<!--//row-->
