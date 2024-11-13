@@ -3,14 +3,15 @@
     <div class="app-auth-body mx-auto">
       <div class="app-auth-branding mb-4">
         <a class="app-logo" href="index.html">
-          <img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo">
+          <%= image_tag 'inss-logo.png', class: "logo-icon me-2" %>
         </a>
       </div>
-      <h2 class="auth-heading text-center mb-4">Sign up to Portal</h2>
+      <h2 class="auth-heading text-center mb-4">Vamos Iniciar o Cálculo?</h2>
       <div class="auth-form-container text-start mx-auto">
         <%= form_with model: @proponent, url: register_path, data: { controller: "multi-step-form" }, class: "auth-form auth-signup-form" do |f| %>
           <div data-multi-step-form-target="step" class="step-1">
             <!-- Campo Nome -->
+            <h6 class="text-center mb-4">Dados pessoais</h6>
             <div class="email mb-3">
               <%= f.text_field :name, class: "form-control #{'border border-danger-subtle' if f.object.errors[:name].present?}", placeholder: "Nome Completo" %>
               <%= f.object.errors[:name].any? ? content_tag(:div, f.object.errors[:name].join(", "), class: "text-danger") : "" %>
@@ -28,6 +29,7 @@
           </div>
           <%= f.fields_for :address do |ff| %>
             <div data-multi-step-form-target="step" class="step-2 d-none">
+              <h6 class="text-center mb-4">Endereço</h6>
               <!-- Campo CEP -->
               <div class="email mb-3">
                 <%= ff.text_field :zip_code, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:zip_code].present?}", placeholder: "Cep" %>
@@ -66,6 +68,7 @@
           <% end %>
           <%= f.fields_for :phones do |ff| %>
             <div data-multi-step-form-target="step" class="step-3 d-none">
+              <h6 class="text-center mb-4">Telefone</h6>
               <!-- Campo Tipo de Telefone -->
               <div class="password mb-3">
                 <%= ff.select :kind, Phone.kinds.keys, { prompt: 'Selecione um Tipo' }, class: "form-control #{'border border-danger-subtle' if ff.object.errors[:kind].present?}" %>
@@ -79,6 +82,7 @@
             </div>
           <% end %>
           <div data-multi-step-form-target="step" class="step-4 d-none">
+            <h6 class="text-center mb-4">Sálario Atual</h6>
             <!-- Campo Salário -->
             <div data-controller="inss" class="password mb-3">
               <%= f.text_field :income, 
@@ -113,11 +117,15 @@
     </div>
     <div class="auth-background-mask"></div>
     <div class="auth-background-overlay p-3 p-lg-5">
-      <div class="d-flex flex-column align-content-end h-100">
-        <div class="h-100"></div>
+      <div class="d-flex flex-column h-100 justify-content-between">
+        <div class="d-flex justify-content-center align-items-center flex-grow-1">
+          <%= image_tag 'caculadora-INSS.png', class: 'img-fluid' %>
+        </div>
         <div class="overlay-content p-3 p-lg-4 rounded">
-          <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
-          <div>Portal is a free Bootstrap 5 admin dashboard template. You can download and view the template license <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+          <h5 class="mb-3 overlay-title">Calcule o valor do seu Inss</h5>
+          <div>
+            Calcule facilmente o valor do seu INSS com base no seu salário.
+          </div>
         </div>
       </div>
     </div>
