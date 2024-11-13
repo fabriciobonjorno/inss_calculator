@@ -32,7 +32,7 @@ RSpec.describe RegisterController, type: :controller do
         {
           proponent: {
             name: "John Doe",
-            document: "12345678901",
+            document:  Faker::IdNumber.brazilian_citizen_number(formatted: true),
             birth_date: "1990-01-01",
             income: "5000.0",
             address_attributes: {

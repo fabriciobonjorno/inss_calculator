@@ -8,7 +8,14 @@ RSpec.describe Proponent, type: :model do
     it { should validate_presence_of(:document) }
     it { should validate_presence_of(:birth_date) }
     it { should validate_presence_of(:income) }
-    it { should validate_uniqueness_of(:document) }
+
+    it "validates uniqueness of document" do
+      proponent1 = create(:proponent, document: "155.356.390-52")
+
+       proponent2 = build(:proponent, document: "155.356.390-52")
+      expect(proponent2.valid?).to be_falsey
+      expect(proponent2.errors[:document]).to include("has already been taken")
+    end
   end
 
   describe 'associations' do
