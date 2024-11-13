@@ -17,7 +17,7 @@ export default class extends Controller {
     let value = this.incomeFieldTarget.value.replace(/\D/g, "");
     if (value) {
       value = (parseInt(value) / 100).toFixed(2);
-      this.incomeFieldTarget.value = `R$ ${value.replace(".", ",")}`;
+      this.incomeFieldTarget.value = `${value.replace(".", ",")}`;
       this.incomeFieldTarget.dataset.rawValue = value;
     } else {
       this.incomeFieldTarget.value = "";

@@ -16,7 +16,10 @@
               <%= f.object.errors[:name].any? ? content_tag(:div, f.object.errors[:name].join(", "), class: "text-danger") : "" %>
             </div>
             <div class="mb-3">
-              <%= f.text_field :document, class: "form-control #{'border border-danger-subtle' if f.object.errors[:document].present?}", placeholder: "CPF" %>
+              <%= f.text_field :document, 
+                               class: "form-control #{'border border-danger-subtle' if f.object.errors[:document].present?}", 
+                               placeholder: "CPF",
+                               oninput: "applyMask()" %>
               <%= f.object.errors[:document].any? ? content_tag(:div, f.object.errors[:document].join(", "), class: "text-danger") : "" %>
             </div>
             <div class="mb-3">
@@ -135,3 +138,15 @@
     </div>
   </div>
 </div>
+<script>
+  function applyMask() {
+    const inputField = document.getElementById('proponent_document');
+    let inputValue = inputField.value;
+    const cleanValue = inputValue.replace(/[^0-9]/g, "");
+    if (cleanValue.length <= 11) {
+      inputField.value = cleanValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    } else {
+      inputField.value = cleanValue.slice(0, 11).replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
+  }
+</script>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get "register", to: "register#new"
+  root "register#new"
   get "calculate_inss", to: "register#calculate_inss"
   get "get_address/:zip_code", to: "register#get_address"
   post "register", to: "register#create"

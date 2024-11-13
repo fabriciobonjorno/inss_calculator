@@ -46,10 +46,6 @@ class RegisterController < ApplicationController
 
   private
 
-  def clean_income(income)
-    income.gsub(/[^\d,]/, "").gsub(".", "").gsub(",", ".").to_f
-  end
-
   def calculate_inss_value(income)
     brackets = [
       { max: 1_045.00, rate: 0.075 },
