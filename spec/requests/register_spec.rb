@@ -4,30 +4,30 @@ require 'rails_helper'
 
 RSpec.describe RegisterController, type: :controller do
   describe "GET #new" do
-    it "atribui um novo proponente à variável @proponent" do
+    it "assigns a new proponent to the @proponent variable" do
       get :new
       expect(assigns(:proponent)).to be_a_new(Proponent)
     end
 
-    it "constrói um endereço associado ao proponente" do
+    it "builds an address associated with the proponent" do
       get :new
       expect(assigns(:proponent).address).to be_a_new(Address)
     end
 
-    it "constrói pelo menos um telefone associado ao proponente" do
+    it "builds at least one phone associated with the proponent" do
       get :new
       expect(assigns(:proponent).phones.size).to eq(1)
       expect(assigns(:proponent).phones.first).to be_a_new(Phone)
     end
 
-    it "renderiza o template :new" do
+    it "renders the :new template" do
       get :new
       expect(response).to render_template(:new)
     end
   end
 
   describe "POST #create" do
-    context "com parâmetros válidos" do
+    context "with valid parameters" do
       let(:valid_params) do
         {
           proponent: {
@@ -51,7 +51,7 @@ RSpec.describe RegisterController, type: :controller do
         }
       end
 
-      it "cria um novo proponente com suas associações" do
+      it "creates a new proponent with its associations" do
         expect {
           post :create, params: valid_params
         }.to change(Proponent, :count).by(1)
@@ -59,13 +59,13 @@ RSpec.describe RegisterController, type: :controller do
         .and change(Phone, :count).by(1)
       end
 
-      it "redireciona para o caminho de registro" do
+      it "redirects to the registration path" do
         post :create, params: valid_params
         expect(response).to redirect_to(register_path)
       end
     end
 
-    context "com parâmetros inválidos" do
+    context "with invalid parameters" do
       let(:invalid_params) do
         {
           proponent: {
@@ -88,13 +88,13 @@ RSpec.describe RegisterController, type: :controller do
         }
       end
 
-      it "não cria um novo proponente" do
+      it "does not create a new proponent" do
         expect {
           post :create, params: invalid_params
         }.not_to change(Proponent, :count)
       end
 
-      it "renderiza o template :new com status unprocessable_entity" do
+      it "renders the :new template with unprocessable_entity status" do
         post :create, params: invalid_params
         expect(response).to render_template(:new)
         expect(response.status).to eq(422)
